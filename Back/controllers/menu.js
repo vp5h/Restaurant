@@ -158,7 +158,7 @@ exports.getAllMenus=(req, res)=>{
     })
   }
 
-exports.updateStock=(req, res, next)=>{
+exports.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      updateStock=(req, res, next)=>{
   let myoperations= req.body.order.menus.map(prod=>{
     return{
       updateOne:{

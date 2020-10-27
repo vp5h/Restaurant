@@ -12,7 +12,7 @@ const cors = require("cors");
 const authRoutes = require("./routes/auth.js");
 // const categoryRoutes = require("./routes/category");
  const menuRoutes = require("./routes/menu");
-// const orderRoutes = require("./routes/order");
+const orderRoutes = require("./routes/order");
 
 mongoose
   .connect(process.env.DATABASE, {
@@ -32,7 +32,7 @@ app.use("/api", authRoutes);
 // app.use("/api", userRoutes)
 // app.use("/api", categoryRoutes)
  app.use("/api", menuRoutes)
-// app.use("/api", orderRoutes)
+ app.use("/api", orderRoutes)
 //PORT
 
 const port = process.env.PORT || 8000;

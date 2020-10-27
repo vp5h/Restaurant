@@ -1,7 +1,7 @@
-const { Order }= require("../models/order");
+const  Order = require("../models/order");
 const { orderBy } = require("lodash");
-const order = require("../models/order");
-const Customer = require("../models/customer");
+
+
 
 exports.getOrderById = (req, res, next, id)=>{
     Order.findById(id)
@@ -17,22 +17,27 @@ exports.getOrderById = (req, res, next, id)=>{
     })
 }
 
-exports.createOrder = (res, req)=>{
-    req.body.order.user = req.profile;
+exports.createOrder = (req, res)=>{
+    req.body.order.employee = req.profile;
     const order = new Order(req.body.order)
     order.save((err, order)=>{
         if(err){
             return res.status(400).json({
                 error: "failed to save your Order IN DB"
-            })
+                
+            }
+            ) 
         }
         res.json(order);
-    })
+     })
+
+
+    
 
 }
 exports.getAllOrders=(req, res)=>{
     Order.find()
-    .populate("user", "_id name")
+    .populate("employee", "_id name")
     .exec((err, order)=>{
         if(err){
             return res.status(400).json({

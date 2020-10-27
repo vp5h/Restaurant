@@ -59,13 +59,13 @@ exports.EmployeePurchaseList=(req, res) =>{
 exports.pushOrderInPurchaseList= (req, res, next)=>{
 
     let purchases = []
-    req.body.order.products.forEach(product=>{
+    req.body.order.menu.forEach(menu=>{
         purchases.push({
-            _id: product._id,
-            name: product.name,
-            description: product.description,
-            category: product.category,
-            quantity: product.quantity,
+            _id: menu._id,
+            name: menu.name,
+            description: menu.description,
+            category: menu.category,
+            quantity: menu.quantity,
             amount: req.body.order.amount,
             transaction_id: req.body.order.transaction_id
         })
