@@ -15,7 +15,7 @@ exports.singnup = (req, res) => {
   employee.save((err, employee) => {
     if (err) {
       return res.status(400).json({
-        err: "NOT ABLE TO SAVE employee IN DB",
+        error: "User Already Exists",
       });
     }
     res.json({
@@ -70,8 +70,12 @@ exports.isSignedIn = expressjwt({
 //middle wares Custom
 exports.isAuthenticated = (req, res, next) => {
   let checker = req.profile && req.auth && req.profile._id == req.auth._id;
+  const a=req.profile
   if (!checker) {
+    
+    console.log(a)
     return res.status(403).json({
+      
       error: "Access Denied",
     });
   }

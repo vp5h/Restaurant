@@ -13,6 +13,18 @@ exports.getEmployeeById = (req, res, next, id) => {
         next();
     })
 };
+exports.getOpEmployeeById = (req, res, next, id) => {
+    Employee.findById(id).exec((err, opemployee)=>{
+
+        if(err || !opemployee){
+            return res.status(400).json({
+                error: "No employee was found in DB"
+            })
+        }
+        req.profile = opemployee;
+        next();
+    })
+};
 
 exports.getEmployee = (req, res) => {
     req.profile.salt= undefined;
@@ -40,7 +52,26 @@ exports.updateEmployee = (req, res) =>{
         }
 
     )
-}
+};
+
+
+
+exports.deleteEmployee = (req, res) =>{
+    let opemployee = req.employee
+    opemployee.remove((err, deletedmenu)=>{
+      if(err){
+        return res.status(400).json(
+          {
+            error: "failed to delete the employee"
+          }
+        )
+      }
+      res.json({
+        message: "Deletion Was a Success",
+        deletedMenu
+      })
+
+    }) }
 
 exports.EmployeePurchaseList=(req, res) =>{
     Order.find({employee: req.profile._id})
@@ -90,3 +121,39 @@ exports.pushOrderInPurchaseList= (req, res, next)=>{
 
 
    
+    exports.getAllemployees=(req, res)=>{
+        Employee.find()
+        
+        .exec((err, employee)=>{
+            if(err){
+                return res.status(400).json({
+                    error: "No Orders Found in DB"
+                })
+            }
+            res.json(employee)
+        })
+    }
+
+
+    exports.createEmployee = (req, res) => {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+          return res.status(422).json({
+            error: errors.array()[0].msg,
+          });
+        }
+      
+        const employee = new Employee(req.body);
+        employee.save((err, employee) => {
+          if (err) {
+            return res.status(400).json({
+              error: "User Already Exists",
+            });
+          }
+          res.json({
+            name: employee.name,
+            email: employee.email,
+            id: employee._id,
+          });
+        });
+      };
