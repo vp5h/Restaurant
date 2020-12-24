@@ -3,7 +3,7 @@
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import LoginForm from './pages/login';
 import Signup from './pages/signup';
-import Base from "./core/Base"
+import Emp from "./pages/Emp"
 import PrivateRoute from "./auth/helper/PrivateRoutes"
 import AdminRoute from "./auth/helper/AdminRoutes"
 import AdminDashBoard from "./pages/AdminDashboard"
@@ -19,6 +19,7 @@ function Routes() {
         <Route path="/signup" exact component={Signup} />
         <Route path="/login" exact component={LoginForm} />
         <AdminRoute path="/admin/dashboard" exact component={AdminDashBoard}/>
+        <AdminRoute path="/admin/employees" exact component={Emp}/>
              
         
         

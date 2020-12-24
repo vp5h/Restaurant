@@ -80,8 +80,8 @@ const Header = (props, {history}) => {
         </Link>
       </Flex>
 
-      <Box  display={{ base: "block", md: "none" }} onClick={toggleMenu}>
-        {show  ? <Flex align="right"><CloseIcon /> </Flex> :<Flex align="right"><ThemeToggler/> <MenuIcon /> </Flex>}
+      <Box  display={{ base: "block", md: "none" }} >
+      <Flex align="right"> <ThemeToggler/> <Flex onClick={toggleMenu}>{show  ? <CloseIcon  />  :<MenuIcon /> } </Flex></Flex>
       </Box>
 
       <Box
